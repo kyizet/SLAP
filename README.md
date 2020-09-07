@@ -1,18 +1,18 @@
-# SLAP - Small LAP
+### SLAP - Small LAP
 
-# Developers 
+## Developers 
 * Zet
 
-# About
+## About
 Just a small website, that is intended to use as a website for a game, which will deliberately sell items in game and inform players with changelogs.
 
-#Languages and Frameworks used
+## Languages and Frameworks used
 * Django 
 * Django Rest Framework 
 * React
 * MDBootstrap
 
-#Prerequisites
+## Prerequisites
 * Do install the dependencies from requirements.txt (Best to be used with a virtual environment)
     * Steps for virtualenv
         * git clone https://github.com/kyizet/slap
