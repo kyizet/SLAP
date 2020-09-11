@@ -1,6 +1,8 @@
 import React from "react";
 import "./App.css";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js/pure";
 
 import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
@@ -9,6 +11,7 @@ import Home from "./pages/Home";
 import Shop from "./pages/shop/Shop";
 import ProductDetail from "./pages/shop/ProductDetail";
 import CheckoutCart from "./pages/shop/CheckoutCart";
+import CheckoutForm from "./pages/shop/CheckoutForm";
 
 import Forum from "./pages/forum/Forum";
 import Topics from "./pages/forum/Topics";
@@ -23,15 +26,16 @@ import Register from "./pages/usercontrol/Register";
 import Logout from "./pages/usercontrol/Logout";
 import AccountProfile from "./pages/usercontrol/AccountProfile";
 
+const stripePromise = loadStripe(
+  "pk_test_51HQ2cOAHruZuBiOAiTyfqwAFqX1EEFVrbHXIlwu68NJc65fP6IV74EAoRyiWeUBxs8obh4XRVYPQ9N8omJzRlGK900UMiESBO6"
+);
+
 function App() {
   return (
     <Router>
       <NavBar />
       <Switch>
         <Route path="/" exact component={Home} />
-        <Route path="/shop" exact component={Shop} />
-        <Route path="/shop/:id" component={ProductDetail} />
-        <Route path="/checkoutcart" component={CheckoutCart} />
 
         <Route path="/forum" exact component={Forum} />
         <Route path="/forum/:id" component={Topics} />
@@ -45,6 +49,13 @@ function App() {
         <Route path="/logout" component={Logout} />
         <Route path="/register" component={Register} />
         <Route path="/accountprofile" component={AccountProfile} />
+
+        <Route path="/shop" exact component={Shop} />
+        <Route path="/shop/:id" component={ProductDetail} />
+        <Route path="/checkoutcart" component={CheckoutCart} />
+        <Elements stripe={stripePromise}>
+          <Route path="/checkoutform" component={CheckoutForm} />
+        </Elements>
       </Switch>
       <Footer />
     </Router>

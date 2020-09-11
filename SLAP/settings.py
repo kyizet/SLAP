@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'rest_auth',
     'corsheaders',
+    'stripe',
 ]
 
 MIDDLEWARE = [
@@ -157,9 +158,6 @@ REST_FRAMEWORK = {
     'DEFAULT_PARSER_CLASSES': [
         'rest_framework.parsers.JSONParser',
     ],
-    'DEFAULT_PERMISSION_CLASSES': (
-        'rest_framework.permissions.AllowAny',
-    ),
 }
 
 AUTH_USER_MODEL = 'usercontrol.Account'

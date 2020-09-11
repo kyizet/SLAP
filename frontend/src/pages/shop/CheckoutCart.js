@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Cookies from "universal-cookie";
+import { Link } from "react-router-dom";
 
 import {
   MDBRow,
@@ -13,6 +13,7 @@ import {
   MDBTableHead,
 } from "mdbreact";
 import { CircleToBlockLoading } from "react-loadingg";
+import Cookies from "universal-cookie";
 
 const CheckoutCart = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -21,23 +22,26 @@ const CheckoutCart = () => {
   const [totalPrice, setTotalPrice] = useState(0);
 
   useEffect(() => {
-    setIsLoading(true)
+    setIsLoading(true);
     setCartItems(JSON.parse(localStorage.getItem("cart")));
-    setIsLoading(false)
+    setIsLoading(false);
   }, []);
 
   useEffect(() => {
+    const cookies = new Cookies();
     var temp = 0;
-    cartItems.map(item => {
-      temp += item.product_price
-    })
-    setTotalPrice(temp)
+    cartItems.map((item) => {
+      temp += item.product_price;
+    });
+    setTotalPrice(temp);
+    cookies.set("totalPrice", temp);
   });
 
   const deleteItem = (itemIndex) => {
-    localStorage.setItem('cart', JSON.stringify(cartItems.filter((item, index) => (
-      index !== itemIndex
-    ))))
+    localStorage.setItem(
+      "cart",
+      JSON.stringify(cartItems.filter((item, index) => index !== itemIndex))
+    );
     setCartItems(JSON.parse(localStorage.getItem("cart")));
   };
 
@@ -104,10 +108,10 @@ const CheckoutCart = () => {
                       ))}
 
                       <tr>
+                        <td></td>
                         <td>
+                          <strong>Total</strong>
                         </td>
-                        <td>
-                          <strong>Total</strong></td>
                         <td></td>
                         <td></td>
                         <td>
@@ -118,12 +122,14 @@ const CheckoutCart = () => {
                   </MDBTable>
                   <form className="px-5">
                     <div className="text-center">
-                      <MDBBtn
-                        className="btn btn-outline-black mt-5 px-5"
-                        type="submit"
-                      >
-                        Checkout
-                      </MDBBtn>
+                      <Link to="/checkoutform">
+                        <MDBBtn
+                          className="btn btn-outline-black mt-5 px-5"
+                          type="submit"
+                        >
+                          Checkout
+                        </MDBBtn>
+                      </Link>
                     </div>
                   </form>
                 </MDBCardBody>

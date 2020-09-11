@@ -42,6 +42,12 @@ class Account(AbstractBaseUser):
         else:
             filename = '{}.{}'.format(uuid4().hex, ext)
         return os.path.join(upload_to, filename)
+    
+    def photo_path(instance, filename):
+        basefilename, file_extension= os.path.splitext(filename)
+        chars= 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890'
+        randomstr= ''.join((random.choice(chars)) for x in range(10))
+        return 'profiles/{userid}/{basename}{randomstring}{ext}'.format(userid= instance.user.id, basename= basefilename, randomstring= randomstr, ext= file_extension)
 
     email = models.EmailField(verbose_name="email", max_length=60, unique=True)
     username = models.CharField(max_length=30, default="defaultuser")
