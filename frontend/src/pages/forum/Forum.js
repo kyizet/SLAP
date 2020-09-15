@@ -20,8 +20,6 @@ const Forum = () => {
     } else {
       setIsLoggedIn(true);
     }
-    console.log("COokies: ", cookies.get("isLoggedIn"));
-    console.log("isLogedIn: ", isLoggedIn);
     fetchThreadTypes();
     fetchThreads();
     setIsLoading(false);

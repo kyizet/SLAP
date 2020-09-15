@@ -28,3 +28,12 @@ code {
 .button {
   cursor: pointer;
 }
+
+.logo {
+  background: url("static/LOGO_WHITE.png") no-repeat center center ;
+  background-size: contain;
+  width: 200px; 
+  height: 200px;
+  margin: auto;
+  width: 50%;
+}

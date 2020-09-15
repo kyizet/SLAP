@@ -7,9 +7,9 @@ import {
   MDBView,
   MDBMask,
   MDBRow,
-  MDBCol,
-  MDBIcon,
-  MDBContainer,
+  MDBCardBody,
+  MDBCard,
+  MDBBtn,
 } from "mdbreact";
 
 const Home = () => {
@@ -30,6 +30,25 @@ const Home = () => {
 
   return (
     <React.Fragment>
+      <MDBCard className="morpheus-den-gradient">
+        <MDBCardBody>
+          <MDBRow className="py-5 my-5"></MDBRow>
+          <div className="logo center"></div>
+          <div className="text-center py-4 white-text">
+            <h3>SLAP - the Small LAP</h3>
+            <p>
+              The recreation of the school with a complete gameplay that you can
+              enjoy with your friends at LAP
+            </p>
+            <p>Download the game below to start your journey</p>
+            <MDBBtn className="btn btn-outline-white mt-5 px-5" type="submit">
+              Download
+            </MDBBtn>
+          </div>
+
+          <MDBRow className="py-5 my-5"></MDBRow>
+        </MDBCardBody>
+      </MDBCard>
       <MDBCarousel
         activeItem={1}
         length={carousel.length}
@@ -57,44 +76,6 @@ const Home = () => {
         </MDBCarouselInner>
       </MDBCarousel>
 
-      <MDBContainer>
-        <section className="text-center my-5">
-          <h2 className="h1-responsive font-weight-bold my-5">
-            Why is it so great?
-          </h2>
-          <p className="lead grey-text w-responsive mx-auto mb-5">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam.
-          </p>
-          <MDBRow>
-            <MDBCol md="4">
-              <MDBIcon icon="chart-area" size="3x" className="red-text" />
-              <h5 className="font-weight-bold my-4">Analytics</h5>
-              <p className="grey-text mb-md-0 mb-5">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Reprehenderit maiores aperiam minima assumenda deleniti hic.
-              </p>
-            </MDBCol>
-            <MDBCol md="4">
-              <MDBIcon icon="book" size="3x" className="cyan-text" />
-              <h5 className="font-weight-bold my-4">Tutorials</h5>
-              <p className="grey-text mb-md-0 mb-5">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Reprehenderit maiores aperiam minima assumenda deleniti hic.
-              </p>
-            </MDBCol>
-            <MDBCol md="4">
-              <MDBIcon far icon="comments" size="3x" className="orange-text" />
-              <h5 className="font-weight-bold my-4">Support</h5>
-              <p className="grey-text mb-md-0 mb-5">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Reprehenderit maiores aperiam minima assumenda deleniti hic.
-              </p>
-            </MDBCol>
-          </MDBRow>
-        </section>
-      </MDBContainer>
     </React.Fragment>
   );
 };

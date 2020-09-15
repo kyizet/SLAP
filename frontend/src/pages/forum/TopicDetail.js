@@ -14,6 +14,7 @@ import { CircleToBlockLoading } from "react-loadingg";
 import Cookies from "universal-cookie";
 import axios from "axios";
 import { Redirect } from "react-router-dom";
+import Pagination from "../../components/Pagination";
 
 const TopicDetail = (props) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -26,6 +27,9 @@ const TopicDetail = (props) => {
     topic_content: "",
   });
   const [isDeleted, setIsDeleted] = useState(false);
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const [productsPerPage] = useState(10);
 
   useEffect(() => {
     setIsLoading(true);
@@ -154,6 +158,15 @@ const TopicDetail = (props) => {
   };
   const cookies = new Cookies();
 
+  const indexOfLastComment = currentPage * productsPerPage;
+  const indexOfFirstComment = indexOfLastComment - productsPerPage;
+  const currentComments = comments.slice(
+    indexOfFirstComment,
+    indexOfLastComment
+  );
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
   return (
     <div>
       {isLoading ? <CircleToBlockLoading color="#ff8282" /> : ""}
@@ -270,7 +283,7 @@ const TopicDetail = (props) => {
         </MDBCard>
         <MDBCard>
           <MDBCardBody>
-            {comments.map((comment, index) => (
+            {currentComments.map((comment, index) => (
               <div key={index}>
                 <MDBRow>
                   <MDBCol>{comment.comment_text}</MDBCol>
@@ -279,6 +292,17 @@ const TopicDetail = (props) => {
                 <hr />
               </div>
             ))}
+            <MDBRow>
+              <MDBCol></MDBCol>
+              <MDBCol>
+                <Pagination
+                  itemsPerPage={productsPerPage}
+                  totalItems={comments.length}
+                  paginate={paginate}
+                />
+              </MDBCol>
+              <MDBCol></MDBCol>
+            </MDBRow>
           </MDBCardBody>
         </MDBCard>
         {isEdit ? (

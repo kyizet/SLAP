@@ -86,6 +86,7 @@ const Register = (props) => {
   return (
     <div className="">
       {isLoggedIn ? <Redirect to="/" /> : ""}
+      {responseMessage.success === "Success" ? <Redirect to="/login" /> : ""}
       <MDBContainer>
         <MDBRow className="py-5"></MDBRow>
 

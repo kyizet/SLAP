@@ -11,9 +11,11 @@ import {
 } from "mdbreact";
 import { Link } from "react-router-dom";
 import { CircleToBlockLoading } from "react-loadingg";
+import Cookies from "universal-cookie";
 
 const Shop = () => {
   const [isLoading, setIsLoading] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const [search, setSearch] = useState("");
   const [productTypes, setProductTypes] = useState([]);
@@ -26,6 +28,13 @@ const Shop = () => {
 
   useEffect(() => {
     setIsLoading(true);
+    const cookies = new Cookies();
+    setIsLoading(true);
+    if (cookies.get("isLoggedIn") == undefined) {
+      setIsLoggedIn(false);
+    } else {
+      setIsLoggedIn(true);
+    }
     fetchProductTypes();
     fetchProductAll();
     setIsLoading(false);
@@ -85,13 +94,17 @@ const Shop = () => {
         <MDBRow>
           <MDBCol sm="7"></MDBCol>
           <MDBCol sm="1">
-            <Link to="/checkoutcart">
-              <MDBIcon
-                icon="shopping-cart"
-                size="2x"
-                className="button amber-text"
-              />
-            </Link>
+            {isLoggedIn ? (
+              <Link to="/checkoutcart">
+                <MDBIcon
+                  icon="shopping-cart"
+                  size="2x"
+                  className="button amber-text"
+                />
+              </Link>
+            ) : (
+              ""
+            )}
           </MDBCol>
           <MDBCol sm="4">
             <div className="form-group">
@@ -114,7 +127,7 @@ const Shop = () => {
         </p>
 
         <MDBRow>
-          {productTypes.map((productType, index) => (
+          {productTypes.sort().map((productType, index) => (
             <MDBCol key={index}>
               <p
                 className="button text-center w-responsive mx-auto mb-5"
@@ -174,8 +187,8 @@ const Shop = () => {
           <MDBCol></MDBCol>
           <MDBCol>
             <Pagination
-              productsPerPage={productsPerPage}
-              totalProducts={productOnpage.length}
+              itemsPerPage={productsPerPage}
+              totalItems={productOnpage.length}
               paginate={paginate}
             />
           </MDBCol>

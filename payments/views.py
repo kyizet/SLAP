@@ -22,7 +22,7 @@ def test_payment(request):
 def save_stripe_info(request):
     data = request.data
     email = data['email']
-    amount = int(data['amount'])
+    amount = int(float(data['amount'])*100)
     payment_method_id = data['payment_method_id']
     extra_msg = ''
 
@@ -39,7 +39,7 @@ def save_stripe_info(request):
         customer=customer,
         payment_method=payment_method_id,
         currency='USD',
-        amount=amount*100,
+        amount=amount,
         confirm=True
     )
 

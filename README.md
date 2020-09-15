@@ -18,9 +18,10 @@ Just a small website, that is intended to use as a website for a game, which wil
         * ```cd slap```
         * ```virtualenv .```
         * ```pip install -r requirements.txt```
-    * Activating virtualen 
+    * Activating virtualenv 
         * For Windows
             * ```Scripts\activate```
+        * For Linux
             * ```source bin/activate```
 * Create a new superuser
     * ```python manage.py createsuperuser```

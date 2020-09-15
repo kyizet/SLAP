@@ -7,28 +7,40 @@ import {
   MDBCardBody,
   MDBContainer,
   MDBCardImage,
+  MDBModal,
+  MDBModalHeader,
+  MDBModalBody,
+  MDBModalFooter,
 } from "mdbreact";
 import Cookies from "universal-cookie";
 import { CircleToBlockLoading } from "react-loadingg";
+import { Link } from "react-router-dom";
 
 const ProductDetail = (props) => {
   const [isLoading, setIsLoading] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [modal, setModal] = useState(false);
 
   const [product, setProduct] = useState({});
-  const [cart, setCart] = useState([]);
 
   useEffect(() => {
     const cookies = new Cookies();
+    setIsLoading(true);
+    if (cookies.get("isLoggedIn") == undefined) {
+      setIsLoggedIn(false);
+    } else {
+      setIsLoggedIn(true);
+    }
     if (props.location.productProps) {
       cookies.set("product", props.location.productProps);
       setProduct(cookies.get("product"));
     } else {
       setProduct(cookies.get("product"));
     }
+    setIsLoading(false);
   }, []);
 
-  const addToCart = (e) => {
-    e.preventDefault();
+  const addToCart = () => {
     if (localStorage.getItem("cart")) {
       const cart = JSON.parse(localStorage.getItem("cart"));
       cart.push(product);
@@ -36,6 +48,10 @@ const ProductDetail = (props) => {
     } else {
       localStorage.setItem("cart", JSON.stringify([]));
     }
+  };
+
+  const toggle = () => {
+    setModal(!modal);
   };
 
   return (
@@ -48,14 +64,7 @@ const ProductDetail = (props) => {
         </h2>
         <MDBRow>
           <MDBCol>
-            <MDBCard
-              className="py-5"
-              style={{ opacity: 0.95 }}
-              style={{
-                maxHeight: "70vh",
-                minHeight: "70vh",
-              }}
-            >
+            <MDBCard className="py-5" style={{ opacity: 0.95 }}>
               {isLoading ? <CircleToBlockLoading color="#ff8282" /> : ""}
               <MDBRow>
                 <MDBCol sm="4">
@@ -71,18 +80,6 @@ const ProductDetail = (props) => {
                 </MDBCol>
                 <MDBCol sm="8">
                   <MDBCardBody className="px-5">
-                    <MDBRow>
-                      <MDBCol sm="4">
-                        <strong>
-                          <p className=" w-responsive mx-auto">Product Name:</p>
-                        </strong>
-                      </MDBCol>
-                      <MDBCol sm="8">
-                        <p className=" w-responsive mx-auto">
-                          {product.product_name}
-                        </p>
-                      </MDBCol>
-                    </MDBRow>
                     <MDBRow>
                       <MDBCol sm="4">
                         <strong>
@@ -135,17 +132,46 @@ const ProductDetail = (props) => {
                         </p>
                       </MDBCol>
                     </MDBRow>
-                    <form className="px-5">
-                      <div className="text-center py-4">
-                        <MDBBtn
-                          onClick={addToCart}
-                          className="btn btn-outline-black mt-5 px-5"
-                          type="submit"
-                        >
-                          Add to Cart
-                        </MDBBtn>
-                      </div>
-                    </form>
+                    {isLoggedIn ? (
+                      <form className="px-5">
+                        <div className="text-center py-4">
+                          <MDBBtn
+                            onClick={() => {
+                              addToCart();
+                              toggle();
+                            }}
+                            color="btn-outline-black mt-5 px-5"
+                          >
+                            Add to cart.
+                          </MDBBtn>
+                          <MDBModal isOpen={modal} toggle={toggle}>
+                            <MDBModalHeader toggle={toggle}>
+                              Add to cart.
+                            </MDBModalHeader>
+                            <MDBModalBody>
+                              Successfully added the item to your shopping cart.
+                            </MDBModalBody>
+                            <MDBModalFooter>
+                              <MDBBtn
+                                color="btn-outline-black"
+                                onClick={toggle}
+                              >
+                                Close
+                              </MDBBtn>
+                              <Link to="/checkoutcart">
+                                <MDBBtn color="btn-outline-black" className="black-text">
+                                  Check your shopping cart.
+                                </MDBBtn>
+                              </Link>
+                            </MDBModalFooter>
+                          </MDBModal>
+                        </div>
+                      </form>
+                    ) : (
+                      <h5 className="text-center py-4">
+                        <a href="/login">Log in</a> to add this item to cart
+                      </h5>
+                    )}
                   </MDBCardBody>
                 </MDBCol>
               </MDBRow>

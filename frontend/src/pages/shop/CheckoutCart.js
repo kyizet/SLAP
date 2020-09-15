@@ -115,7 +115,7 @@ const CheckoutCart = () => {
                         <td></td>
                         <td></td>
                         <td>
-                          <strong>${totalPrice}</strong>
+                          <strong>${Math.round((totalPrice + Number.EPSILON) * 100) / 100}</strong>
                         </td>
                       </tr>
                     </MDBTableBody>
@@ -124,7 +124,8 @@ const CheckoutCart = () => {
                     <div className="text-center">
                       <Link to="/checkoutform">
                         <MDBBtn
-                          className="btn btn-outline-black mt-5 px-5"
+                          color="btn-outline-black"
+                          className="black-text mt-5 px-5"
                           type="submit"
                         >
                           Checkout

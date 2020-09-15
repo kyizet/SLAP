@@ -13,6 +13,7 @@ import {
   MDBInput,
 } from "mdbreact";
 import { CircleToBlockLoading } from "react-loadingg";
+import { Link } from "react-router-dom";
 
 const CheckoutCart = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -88,9 +89,14 @@ const CheckoutCart = () => {
             <MDBCardBody style={{ minHeight: "50vh" }}>
               <MDBRow className="py-5 pt-5"></MDBRow>
               <MDBRow className="py-5 pt-5"></MDBRow>
-              <p className="h6 text-center py-4 black-text">
+              <p className="h3 text-center black-text">
                 Thank you for your donation. Enjoy!
               </p>
+              <Link to="/shop">
+                <p href="/shop" className="blue-text text-center">
+                  Continue shopping?
+                </p>
+              </Link>
               <MDBRow className="py-5 pt-5"></MDBRow>
             </MDBCardBody>
           </MDBCard>
@@ -109,6 +115,9 @@ const CheckoutCart = () => {
                       Checkout Form
                     </h2>
                     <form onSubmit={handleSubmit} className="stripe-form">
+                      <h4 className="text-center">
+                        <strong>${Math.round(amount * 100) / 100}</strong>
+                      </h4>
                       <MDBInput
                         outline
                         disabled
@@ -128,7 +137,8 @@ const CheckoutCart = () => {
                       <CardElement id="card-element" onChange={handleChange} />
                       <div className="text-center py-4">
                         <MDBBtn
-                          className="btn btn-outline-black mt-5 px-5"
+                          color="btn-outline-black"
+                          className="black-text mt-5 px-5"
                           type="submit"
                         >
                           Submit

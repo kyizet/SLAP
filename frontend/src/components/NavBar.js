@@ -27,7 +27,7 @@ const NavBar = () => {
   }, []);
 
   return (
-    <MDBNavbar color="elegant-color-dark" dark expand="md">
+    <MDBNavbar color="unique-color-dark" dark expand="md">
       <MDBNavbarBrand>
         <strong className="white-text">SLAP</strong>
       </MDBNavbarBrand>

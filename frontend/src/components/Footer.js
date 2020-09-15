@@ -4,30 +4,26 @@ import { MDBCol, MDBContainer, MDBRow, MDBFooter } from "mdbreact";
 const Footer = () => {
   return (
     <React.Fragment>
-      <MDBFooter color="elegant-color-dark" className="font-small pt-4">
+      <MDBFooter color="unique-color-dark" className="font-small pt-4">
         <MDBContainer fluid className="text-center text-md-left">
           <MDBRow>
             <MDBCol md="6">
-              <h5 className="title"> Footer Content </h5>{" "}
+              <h3 className="title"> About </h3>{" "}
               <p>
-                Here you can use rows and columns here to organize your footer
-                content.{" "}
+                A game that guarantees you to LAP through your computer.{" "}
               </p>{" "}
             </MDBCol>{" "}
             <MDBCol md="6">
-              <h5 className="title"> Links </h5>{" "}
+              <h5 className="title"> Social Media </h5>{" "}
               <ul>
                 <li className="list-unstyled">
-                  <a href="#!"> Link 1 </a>{" "}
+                  <a href="https://www.instagram.com/"> Instagram </a>{" "}
                 </li>{" "}
                 <li className="list-unstyled">
-                  <a href="#!"> Link 2 </a>{" "}
+                  <a href="https://www.facebook.com/"> Facebook </a>{" "}
                 </li>{" "}
                 <li className="list-unstyled">
-                  <a href="#!"> Link 3 </a>{" "}
-                </li>{" "}
-                <li className="list-unstyled">
-                  <a href="#!"> Link 4 </a>{" "}
+                  <a href="https://twitter.com/home"> Twitter </a>{" "}
                 </li>{" "}
               </ul>{" "}
             </MDBCol>{" "}
@@ -35,9 +31,9 @@ const Footer = () => {
         </MDBContainer>{" "}
         <div className="footer-copyright text-center py-3">
           <MDBContainer fluid>
-            & copy; {new Date().getFullYear()}
+            &copy; {new Date().getFullYear()}
             Copyright:{" "}
-            <a href="https://www.mdbootstrap.com"> MDBootstrap.com </a>{" "}
+            <a href="https://www.mdbootstrap.com"> slap.com </a>{" "}
           </MDBContainer>{" "}
         </div>{" "}
       </MDBFooter>

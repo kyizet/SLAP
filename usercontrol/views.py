@@ -18,6 +18,7 @@ def registration_view(request):
             account = serializer.save()
             data['response'] = "Account has been created"
             data['email'] = account.email + " can now be logged in."
+            data['success'] = "Success"
             return Response(data)
         else:
             return Response(serializer.errors)
